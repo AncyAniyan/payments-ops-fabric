@@ -1,0 +1,6 @@
+-- 02_pay_load.psql : run with psql from the project folder.
+\copy pay.banks           FROM '/Users/ancyrahul/Projects/payments-ops-fabric/data/payments/banks.csv'           WITH (FORMAT csv, HEADER true)
+\copy pay.accounts        FROM '/Users/ancyrahul/Projects/payments-ops-fabric/data/payments/accounts.csv'        WITH (FORMAT csv, HEADER true)
+\copy pay.payments        FROM '/Users/ancyrahul/Projects/payments-ops-fabric/data/payments/payments.csv'        WITH (FORMAT csv, HEADER true)
+\copy pay.payment_events  FROM '/Users/ancyrahul/Projects/payments-ops-fabric/data/payments/payment_events.csv'  WITH (FORMAT csv, HEADER true)
+\copy pay.rail_settlement FROM '/Users/ancyrahul/Projects/payments-ops-fabric/data/payments/rail_settlement.csv' WITH (FORMAT csv, HEADER true)
