@@ -1,0 +1,414 @@
+table payments_curated
+	lineageTag: 47664dbb-cd9e-4aa6-bda5-e7c48df9b9ea
+	sourceLineageTag: [dbo].[payments_curated]
+
+	measure Payments = COUNTROWS ( payments_curated )
+		formatString: 0
+		displayFolder: 01 Volume & Value
+		lineageTag: 6db734d0-341a-490e-846b-1f1a8d7450a5
+
+		changedProperty = Name
+
+		changedProperty = DisplayFolder
+
+	measure 'Value SAR' = SUM ( payments_curated[amount_sar] )
+		displayFolder: 01 Volume & Value
+		lineageTag: 30dd85e5-ec48-4e41-aacb-6a1b4dd5af7f
+
+		changedProperty = Name
+
+		changedProperty = DisplayFolder
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Final Outgoing' = ```
+			
+			        CALCULATE ( [Payments], payments_curated[is_final_out] = 1 )
+			```
+		formatString: 0
+		displayFolder: 01 Volume & Value
+		lineageTag: 93b375c7-d4b5-42fb-8949-e9163fd95b58
+
+		changedProperty = Name
+
+		changedProperty = DisplayFolder
+
+	measure 'Settled Value OUT' = CALCULATE ( [Value SAR], payments_curated[direction] = "OUT", payments_curated[final_status] = "SETTLED" )
+		displayFolder: 01 Volume & Value
+		lineageTag: f588c759-5a7e-4b6f-80c6-125aa2d8ed88
+
+		changedProperty = Name
+
+		changedProperty = DisplayFolder
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'STP Rate' = ```
+			
+			VAR FinalOut = 
+			    CALCULATE ( 
+			        [Payments], 
+			        payments_curated[direction] = "OUT", 
+			        payments_curated[final_status] IN { "SETTLED", "REJECTED", "RETURNED" } 
+			    )
+			VAR STPCount = 
+			    CALCULATE ( 
+			        [Payments], 
+			        payments_curated[direction] = "OUT", 
+			        payments_curated[final_status] IN { "SETTLED", "REJECTED", "RETURNED" },
+			        payments_curated[is_stp] = TRUE ()
+			    )
+			RETURN
+			    DIVIDE ( STPCount, FinalOut )
+			```
+		formatString: 0.00%;-0.00%;0.00%
+		displayFolder: 02 Performance & SLA
+		lineageTag: 3a2f28ed-fa3d-4d68-a44a-f7475b3ce319
+
+		changedProperty = Name
+
+		changedProperty = DisplayFolder
+
+		changedProperty = FormatString
+
+	measure Rejected = CALCULATE ( [Payments], payments_curated[final_status] = "REJECTED" )
+		formatString: 0
+		displayFolder: 02 Performance & SLA
+		lineageTag: 8191592c-859e-4598-9826-7c1d66440dc3
+
+		changedProperty = Name
+
+		changedProperty = DisplayFolder
+
+	measure 'Rejection Rate' = DIVIDE ( [Rejected], [Payments] )
+		formatString: 0.00%;-0.00%;0.00%
+		displayFolder: 02 Performance & SLA
+		lineageTag: 8e7e9063-479e-4fd2-8ca9-7fd54bdaa18a
+
+		changedProperty = Name
+
+		changedProperty = DisplayFolder
+
+		changedProperty = FormatString
+
+	measure 'Median Settle Seconds' = MEDIAN ( settle_times[seconds_to_settle] )
+		displayFolder: 02 Performance & SLA
+		lineageTag: fbe4a832-35d3-456e-9c9c-3ec27aafd313
+
+		changedProperty = Name
+
+		changedProperty = DisplayFolder
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'P95 Settle Seconds' = PERCENTILE.INC ( settle_times[seconds_to_settle], 0.95 )
+		displayFolder: 02 Performance & SLA
+		lineageTag: 16831103-9a43-48d2-bd8c-89ef1704da1f
+
+		changedProperty = Name
+
+		changedProperty = DisplayFolder
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'SARIE Outside-Window Share' = ```
+			
+			DIVIDE ( 
+			    CALCULATE ( [Payments], payments_curated[sarie_outside_window] = 1 ), 
+			    CALCULATE ( [Payments], payments_curated[rail] = "SARIE", payments_curated[direction] = "OUT" ) 
+			)
+			```
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: 02 Performance & SLA
+		lineageTag: 29f9a4c1-7b59-4bdc-93f9-f74c20807429
+
+		changedProperty = Name
+
+		changedProperty = DisplayFolder
+
+		changedProperty = FormatString
+
+	measure 'Recon Items' = COUNTROWS ( recon_items )
+		formatString: 0
+		displayFolder: 03 Reconciliation
+		lineageTag: 274618e2-8a4b-4ef6-9f31-b5476ee0c294
+
+		changedProperty = Name
+
+		changedProperty = DisplayFolder
+
+	measure 'Recon Breaks' = CALCULATE ( [Recon Items], recon_items[category] <> "matched" )
+		formatString: 0
+		displayFolder: 03 Reconciliation
+		lineageTag: 7604b4cb-5dc4-46ba-90d3-cf3b3c588701
+
+		changedProperty = Name
+
+		changedProperty = DisplayFolder
+
+	measure 'P95 Settle Minutes' = DIVIDE ( [P95 Settle Seconds], 60 )
+		formatString: 0.0
+		displayFolder: 02 Performance & SLA
+		lineageTag: 3ed1ae48-3720-47e1-b048-5bd02bf45429
+
+		changedProperty = Name
+
+		changedProperty = DisplayFolder
+
+		changedProperty = FormatString
+
+	column payment_id
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: ef4532da-6bf2-4ad5-976c-a367b666d7fa
+		sourceLineageTag: payment_id
+		summarizeBy: none
+		sourceColumn: payment_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column end_to_end_id
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 74382e32-e2b5-43bb-8b65-fb9bdefd7fb9
+		sourceLineageTag: end_to_end_id
+		summarizeBy: none
+		sourceColumn: end_to_end_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column direction
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: d10aea31-cd44-42da-85d2-3b58e2c3fd23
+		sourceLineageTag: direction
+		summarizeBy: none
+		sourceColumn: direction
+
+		annotation SummarizationSetBy = Automatic
+
+	column rail
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 6755a45b-818e-4277-9771-d4128a935135
+		sourceLineageTag: rail
+		summarizeBy: none
+		sourceColumn: rail
+
+		annotation SummarizationSetBy = Automatic
+
+	column channel
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 2c7837d3-15b8-4110-90dc-41614c6f417d
+		sourceLineageTag: channel
+		summarizeBy: none
+		sourceColumn: channel
+
+		annotation SummarizationSetBy = Automatic
+
+	column account_id
+		dataType: string
+		isHidden
+		sourceProviderType: varchar(8000)
+		lineageTag: 0a177f97-0c61-4904-9d30-c377af38362a
+		sourceLineageTag: account_id
+		summarizeBy: none
+		sourceColumn: account_id
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column customer_type
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 1ab28fe7-646e-439f-84e3-ccaee59a1ff1
+		sourceLineageTag: customer_type
+		summarizeBy: none
+		sourceColumn: customer_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column counterparty_bank
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 10df583d-b4a7-4549-a3f2-ad2fa8f450d0
+		sourceLineageTag: counterparty_bank
+		summarizeBy: none
+		sourceColumn: counterparty_bank
+
+		annotation SummarizationSetBy = Automatic
+
+	column currency
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 6eaac09a-e99f-4fbf-801c-498471f24747
+		sourceLineageTag: currency
+		summarizeBy: none
+		sourceColumn: currency
+
+		annotation SummarizationSetBy = Automatic
+
+	column amount_original
+		dataType: double
+		sourceProviderType: float
+		lineageTag: aa4ca2ca-0a35-4050-9ef8-0227b45fe742
+		sourceLineageTag: amount_original
+		summarizeBy: sum
+		sourceColumn: amount_original
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column amount_sar
+		dataType: double
+		sourceProviderType: float
+		lineageTag: 336fbf4b-d5cc-4492-a497-9c39efd39128
+		sourceLineageTag: amount_sar
+		summarizeBy: sum
+		sourceColumn: amount_sar
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column initiated_at
+		dataType: dateTime
+		formatString: General Date
+		sourceProviderType: datetime2
+		lineageTag: 2147483d-547b-4ad2-b3e8-dd279aa5743b
+		sourceLineageTag: initiated_at
+		summarizeBy: none
+		sourceColumn: initiated_at
+
+		annotation SummarizationSetBy = Automatic
+
+	column sent_at
+		dataType: dateTime
+		formatString: General Date
+		sourceProviderType: datetime2
+		lineageTag: 4fa3b645-cfa7-4975-8b68-a8cab4adf390
+		sourceLineageTag: sent_at
+		summarizeBy: none
+		sourceColumn: sent_at
+
+		annotation SummarizationSetBy = Automatic
+
+	column final_status
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: e98b7828-6a75-43cd-b845-7cbc1cb6b637
+		sourceLineageTag: final_status
+		summarizeBy: none
+		sourceColumn: final_status
+
+		annotation SummarizationSetBy = Automatic
+
+	column final_status_at
+		dataType: dateTime
+		formatString: General Date
+		sourceProviderType: datetime2
+		lineageTag: 0e275f15-d37f-4540-95d3-f7ea863cc220
+		sourceLineageTag: final_status_at
+		summarizeBy: none
+		sourceColumn: final_status_at
+
+		annotation SummarizationSetBy = Automatic
+
+	column reject_reason
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 995281cb-83b5-4881-93ff-8b52894e4938
+		sourceLineageTag: reject_reason
+		summarizeBy: none
+		sourceColumn: reject_reason
+
+		annotation SummarizationSetBy = Automatic
+
+	column hold_reason
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 380b2756-f601-4c36-b052-6a33fadf6ed3
+		sourceLineageTag: hold_reason
+		summarizeBy: none
+		sourceColumn: hold_reason
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_stp
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		sourceProviderType: bit
+		lineageTag: ef1f7b7f-3540-4b1e-b8d6-169722832cc0
+		sourceLineageTag: is_stp
+		summarizeBy: none
+		sourceColumn: is_stp
+
+		annotation SummarizationSetBy = Automatic
+
+	column initiated_date
+		dataType: dateTime
+		formatString: General Date
+		sourceProviderType: date
+		lineageTag: 431d6472-7af9-4139-957a-750607c1b8e8
+		sourceLineageTag: initiated_date
+		summarizeBy: none
+		sourceColumn: initiated_date
+
+		annotation SummarizationSetBy = Automatic
+
+	column initiated_hour
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: d9ca0f00-f4a4-4cc9-a9f8-db99f71a2c54
+		sourceLineageTag: initiated_hour
+		summarizeBy: sum
+		sourceColumn: initiated_hour
+
+		annotation SummarizationSetBy = Automatic
+
+	column sarie_outside_window
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 643dffb7-94ad-4ebf-b84d-811f8ebbfe7f
+		sourceLineageTag: sarie_outside_window
+		summarizeBy: sum
+		sourceColumn: sarie_outside_window
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_final_out
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 37d5101a-ce60-4974-833e-59a094bf3537
+		sourceLineageTag: is_final_out
+		summarizeBy: sum
+		sourceColumn: is_final_out
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_salary_day
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: f4665e8e-28ee-43ac-a0c1-2f7a912ad1f3
+		sourceLineageTag: is_salary_day
+		summarizeBy: sum
+		sourceColumn: is_salary_day
+
+		annotation SummarizationSetBy = Automatic
+
+	partition payments_curated = entity
+		mode: directLake
+		source
+			entityName: payments_curated
+			schemaName: dbo
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+

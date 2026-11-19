@@ -1,0 +1,59 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.15.0/schema.json",
+  "name": "06e79df74e44653c2035",
+  "position": {
+    "x": 510.32181168057213,
+    "y": 11.442193087008343,
+    "z": 2000,
+    "height": 280.06015037593983,
+    "width": 372.45112781954884,
+    "tabOrder": 2000
+  },
+  "visual": {
+    "visualType": "cardVisual",
+    "query": {
+      "queryState": {
+        "Data": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "payments_curated"
+                    }
+                  },
+                  "Property": "P95 Settle Minutes"
+                }
+              },
+              "queryRef": "payments_curated.P95 Settle Minutes",
+              "nativeQueryRef": "P95 Settle Minutes"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "isDefaultSort": true
+      }
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "70ddf8d575bb4ed29ece",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "payments_curated"
+              }
+            },
+            "Property": "P95 Settle Minutes"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
+  }
+}

@@ -1,0 +1,107 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
+  "name": "f5be5a1a9a3d89dd873b",
+  "position": {
+    "x": 638.07518796992474,
+    "y": 0,
+    "z": 2,
+    "height": 280.06015037593983,
+    "width": 871.93984962406012,
+    "tabOrder": 2
+  },
+  "visual": {
+    "visualType": "donutChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "recon_items"
+                    }
+                  },
+                  "Property": "category"
+                }
+              },
+              "queryRef": "recon_items.category",
+              "nativeQueryRef": "category",
+              "active": true
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "payments_curated"
+                    }
+                  },
+                  "Property": "Recon Items"
+                }
+              },
+              "queryRef": "payments_curated.Recon Items",
+              "nativeQueryRef": "Recon Items"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "payments_curated"
+                  }
+                },
+                "Property": "Recon Items"
+              }
+            },
+            "direction": "Descending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "7fd39c8f22aa62e73c68",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "payments_curated"
+              }
+            },
+            "Property": "Recon Items"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "92883a152146023c740c",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "recon_items"
+              }
+            },
+            "Property": "category"
+          }
+        },
+        "type": "Categorical"
+      }
+    ]
+  }
+}

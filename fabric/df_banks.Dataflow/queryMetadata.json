@@ -1,0 +1,29 @@
+{
+  "formatVersion": "202502",
+  "computeEngineSettings": {
+    "allowModernEvaluationEngine": true
+  },
+  "name": "df_banks",
+  "queryGroups": [],
+  "documentLocale": "en-IN",
+  "queriesMetadata": {
+    "banks": {
+      "queryId": "9eb84a33-772b-402a-80d8-0117847a04be",
+      "queryName": "banks",
+      "loadEnabled": false
+    },
+    "banks_DataDestination": {
+      "queryId": "8c6c3014-12f9-4c8d-b519-b2165a29ab3d",
+      "queryName": "banks_DataDestination",
+      "isHidden": true,
+      "loadEnabled": false
+    }
+  },
+  "connections": [
+    {
+      "path": "Lakehouse",
+      "kind": "Lakehouse",
+      "connectionId": "{\"ClusterId\":\"a30d9aad-dabc-4278-ad48-32fbe63b238a\",\"DatasourceId\":\"2c9386b2-74ca-4e45-9a94-8a04d59d0cd4\"}"
+    }
+  ]
+}

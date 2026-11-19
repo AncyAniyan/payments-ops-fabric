@@ -1,0 +1,44 @@
+table banks
+	lineageTag: 981e2b04-377a-4349-b8d1-0b03675f7ec9
+	sourceLineageTag: [dbo].[banks]
+
+	column bank_code
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: b3d2df91-3253-400e-8e39-a7e046f94124
+		sourceLineageTag: bank_code
+		summarizeBy: none
+		sourceColumn: bank_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column bank_name
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 3ca6c235-3dbf-4b2f-8f0e-a49c8f4decf1
+		sourceLineageTag: bank_name
+		summarizeBy: none
+		sourceColumn: bank_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_internal
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		sourceProviderType: bit
+		lineageTag: dbf4c3ae-63e5-448c-8868-da99654b6975
+		sourceLineageTag: is_internal
+		summarizeBy: none
+		sourceColumn: is_internal
+
+		annotation SummarizationSetBy = Automatic
+
+	partition banks = entity
+		mode: directLake
+		source
+			entityName: banks
+			schemaName: dbo
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+

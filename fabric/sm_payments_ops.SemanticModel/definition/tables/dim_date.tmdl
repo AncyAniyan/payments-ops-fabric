@@ -1,0 +1,103 @@
+table dim_date
+	lineageTag: d7b76f29-b2b3-4d1c-a9bc-2bc8b7b9ed4f
+	sourceLineageTag: [dbo].[dim_date]
+	dataCategory: Time
+
+	column date
+		dataType: dateTime
+		isKey
+		formatString: General Date
+		sourceProviderType: date
+		lineageTag: 0687cbe3-07fc-4be8-aa27-b5274554115c
+		sourceLineageTag: date
+		summarizeBy: none
+		sourceColumn: date
+
+		annotation SummarizationSetBy = Automatic
+
+	column year
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: bf21948b-bcd5-4e7a-b1df-dde10ce7578a
+		sourceLineageTag: year
+		summarizeBy: none
+		sourceColumn: year
+
+		annotation SummarizationSetBy = Automatic
+
+	column month_no
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 5dff4789-8a4e-49ec-b11c-baefdd036336
+		sourceLineageTag: month_no
+		summarizeBy: none
+		sourceColumn: month_no
+
+		annotation SummarizationSetBy = Automatic
+
+	column month_name
+		dataType: string
+		sourceProviderType: varchar(20)
+		lineageTag: 7cee3632-6196-4b81-bbb2-d57f325e315a
+		sourceLineageTag: month_name
+		summarizeBy: none
+		sourceColumn: month_name
+		sortByColumn: month_no
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column year_month
+		dataType: string
+		sourceProviderType: varchar(7)
+		lineageTag: f06ed954-48b2-4c50-8930-89f56fe3cad9
+		sourceLineageTag: year_month
+		summarizeBy: none
+		sourceColumn: year_month
+
+		annotation SummarizationSetBy = Automatic
+
+	column day_no
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 99a58528-35e8-4a72-9f9a-2ac8499af8be
+		sourceLineageTag: day_no
+		summarizeBy: none
+		sourceColumn: day_no
+
+		annotation SummarizationSetBy = Automatic
+
+	column day_name
+		dataType: string
+		sourceProviderType: varchar(20)
+		lineageTag: 1cd970f0-c19d-4104-a895-c55ac67795c3
+		sourceLineageTag: day_name
+		summarizeBy: none
+		sourceColumn: day_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_weekend
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 8112cf28-25db-42a2-bb10-9f9d26b87a87
+		sourceLineageTag: is_weekend
+		summarizeBy: none
+		sourceColumn: is_weekend
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_date = entity
+		mode: directLake
+		source
+			entityName: dim_date
+			schemaName: dbo
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+

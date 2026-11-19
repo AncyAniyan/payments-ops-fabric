@@ -1,0 +1,56 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
+  "name": "17e8fae1c705ecc4088c",
+  "position": {
+    "x": 819.96992481203006,
+    "y": 33.203007518796994,
+    "z": 3000,
+    "height": 280,
+    "width": 280,
+    "tabOrder": 3000
+  },
+  "visual": {
+    "visualType": "cardVisual",
+    "query": {
+      "queryState": {
+        "Data": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "payments_curated"
+                    }
+                  },
+                  "Property": "STP Rate"
+                }
+              },
+              "queryRef": "payments_curated.STP Rate",
+              "nativeQueryRef": "STP Rate"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "payments_curated"
+                  }
+                },
+                "Property": "STP Rate"
+              }
+            },
+            "direction": "Descending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

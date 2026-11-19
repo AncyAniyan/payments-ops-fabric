@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "sm_payments_ops"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "3cdd5bfd-db46-a560-4f90-850422f08195"
+  }
+}

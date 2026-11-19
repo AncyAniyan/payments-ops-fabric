@@ -1,0 +1,7 @@
+role RetailOps
+	modelPermission: read
+
+	tablePermission payments_curated = [channel] IN {"Branch", "Online", "Mobile"}
+
+	annotation PBI_Id = 9d89f2d5e2f6482b89d43efcaa842c30
+

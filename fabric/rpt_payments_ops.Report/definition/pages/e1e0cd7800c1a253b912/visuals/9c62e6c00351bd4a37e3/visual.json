@@ -1,0 +1,236 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.15.0/schema.json",
+  "name": "9c62e6c00351bd4a37e3",
+  "position": {
+    "x": 1361.6209773539929,
+    "y": 322.6698450536353,
+    "z": 2004,
+    "height": 739.165673420739,
+    "width": 542.35995232419555,
+    "tabOrder": 2004
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "payments_curated"
+                    }
+                  },
+                  "Property": "end_to_end_id"
+                }
+              },
+              "queryRef": "payments_curated.end_to_end_id",
+              "nativeQueryRef": "end_to_end_id"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "payments_curated"
+                    }
+                  },
+                  "Property": "rail"
+                }
+              },
+              "queryRef": "payments_curated.rail",
+              "nativeQueryRef": "rail"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "payments_curated"
+                    }
+                  },
+                  "Property": "amount_sar"
+                }
+              },
+              "queryRef": "Sum(payments_curated.amount_sar)",
+              "nativeQueryRef": "amount_sar"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "payments_curated"
+                    }
+                  },
+                  "Property": "final_status"
+                }
+              },
+              "queryRef": "payments_curated.final_status",
+              "nativeQueryRef": "final_status"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "payments_curated"
+                    }
+                  },
+                  "Property": "initiated_at"
+                }
+              },
+              "queryRef": "payments_curated.initiated_at",
+              "nativeQueryRef": "initiated_at"
+            }
+          ]
+        }
+      }
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Stuck Payments Queue'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "68b8b95da2cbeea2b740",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "payments_curated"
+              }
+            },
+            "Property": "end_to_end_id"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "ca27bd00001924c22346",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "payments_curated"
+              }
+            },
+            "Property": "rail"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "6df475d516d84e7c951e",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "payments_curated"
+              }
+            },
+            "Property": "final_status"
+          }
+        },
+        "type": "Categorical",
+        "filter": {
+          "Version": 2,
+          "From": [
+            {
+              "Name": "p",
+              "Entity": "payments_curated",
+              "Type": 0
+            }
+          ],
+          "Where": [
+            {
+              "Condition": {
+                "In": {
+                  "Expressions": [
+                    {
+                      "Column": {
+                        "Expression": {
+                          "SourceRef": {
+                            "Source": "p"
+                          }
+                        },
+                        "Property": "final_status"
+                      }
+                    }
+                  ],
+                  "Values": [
+                    [
+                      {
+                        "Literal": {
+                          "Value": "'PENDING'"
+                        }
+                      }
+                    ],
+                    [
+                      {
+                        "Literal": {
+                          "Value": "'SENT'"
+                        }
+                      }
+                    ]
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "name": "4a7c7dbc6c1dab869b82",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "payments_curated"
+              }
+            },
+            "Property": "initiated_at"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "67bb97b08010905c140a",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "payments_curated"
+              }
+            },
+            "Property": "amount_sar"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
+  }
+}

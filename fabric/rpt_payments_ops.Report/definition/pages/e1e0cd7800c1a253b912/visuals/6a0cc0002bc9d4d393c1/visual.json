@@ -1,0 +1,74 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.15.0/schema.json",
+  "name": "6a0cc0002bc9d4d393c1",
+  "position": {
+    "x": 1098.450536352801,
+    "y": 9.1537544696066746,
+    "z": 1000,
+    "height": 280.06015037593983,
+    "width": 395.5488721804511,
+    "tabOrder": 1000
+  },
+  "visual": {
+    "visualType": "cardVisual",
+    "query": {
+      "queryState": {
+        "Data": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "payments_curated"
+                    }
+                  },
+                  "Property": "SARIE Outside-Window Share"
+                }
+              },
+              "queryRef": "payments_curated.SARIE Outside-Window Share",
+              "nativeQueryRef": "SARIE Outside-Window Share"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "payments_curated"
+                  }
+                },
+                "Property": "SARIE Outside-Window Share"
+              }
+            },
+            "direction": "Descending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "c07db648a05c572c871b",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "payments_curated"
+              }
+            },
+            "Property": "SARIE Outside-Window Share"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
+  }
+}

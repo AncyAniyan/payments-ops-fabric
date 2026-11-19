@@ -1,0 +1,89 @@
+table recon_items
+	lineageTag: 721ade90-1984-43ac-86c1-17b86a0c07b4
+	sourceLineageTag: [dbo].[recon_items]
+
+	column end_to_end_id
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 19ced98a-2220-4137-b414-fabf097dfc07
+		sourceLineageTag: end_to_end_id
+		summarizeBy: none
+		sourceColumn: end_to_end_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column rail
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 078ecb1d-d1cf-4cfd-982c-ff5b0b350a64
+		sourceLineageTag: rail
+		summarizeBy: none
+		sourceColumn: rail
+
+		annotation SummarizationSetBy = Automatic
+
+	column ledger_amount_sar
+		dataType: double
+		sourceProviderType: float
+		lineageTag: 091eb7ad-9a02-490e-b1fb-ad82c9bb9c82
+		sourceLineageTag: ledger_amount_sar
+		summarizeBy: sum
+		sourceColumn: ledger_amount_sar
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column rail_amount_sar
+		dataType: double
+		sourceProviderType: float
+		lineageTag: 7059da89-c015-4288-9aef-c6a551aa53ca
+		sourceLineageTag: rail_amount_sar
+		summarizeBy: sum
+		sourceColumn: rail_amount_sar
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column ledger_settlement_date
+		dataType: dateTime
+		formatString: General Date
+		sourceProviderType: date
+		lineageTag: 4d30b47f-3320-4ae3-ab15-af55982e0b2d
+		sourceLineageTag: ledger_settlement_date
+		summarizeBy: none
+		sourceColumn: ledger_settlement_date
+
+		annotation SummarizationSetBy = Automatic
+
+	column rail_settlement_date
+		dataType: dateTime
+		formatString: General Date
+		sourceProviderType: date
+		lineageTag: dd6182f2-0a6a-4589-a24c-fa971b45a90c
+		sourceLineageTag: rail_settlement_date
+		summarizeBy: none
+		sourceColumn: rail_settlement_date
+
+		annotation SummarizationSetBy = Automatic
+
+	column category
+		dataType: string
+		sourceProviderType: varchar(17)
+		lineageTag: d3eb3161-e0cb-4ebe-b704-11a1bfff4e67
+		sourceLineageTag: category
+		summarizeBy: none
+		sourceColumn: category
+
+		annotation SummarizationSetBy = Automatic
+
+	partition recon_items = entity
+		mode: directLake
+		source
+			entityName: recon_items
+			schemaName: dbo
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+

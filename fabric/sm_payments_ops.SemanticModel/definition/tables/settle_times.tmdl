@@ -1,0 +1,54 @@
+table settle_times
+	lineageTag: cc83ee85-d6ac-4ded-97ef-a0b1bdbdd1db
+	sourceLineageTag: [dbo].[settle_times]
+
+	column payment_id
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 5b65639c-41b1-4574-aa54-cfd6d59f73dd
+		sourceLineageTag: payment_id
+		summarizeBy: none
+		sourceColumn: payment_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column rail
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 8e99be31-bda6-467f-8e87-b1e2a92ab67a
+		sourceLineageTag: rail
+		summarizeBy: none
+		sourceColumn: rail
+
+		annotation SummarizationSetBy = Automatic
+
+	column direction
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 5c17ce8e-d5d2-4f03-93aa-e42b42d57793
+		sourceLineageTag: direction
+		summarizeBy: none
+		sourceColumn: direction
+
+		annotation SummarizationSetBy = Automatic
+
+	column seconds_to_settle
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 632f979e-e0f5-4d79-99d0-57bf4363908f
+		sourceLineageTag: seconds_to_settle
+		summarizeBy: sum
+		sourceColumn: seconds_to_settle
+
+		annotation SummarizationSetBy = Automatic
+
+	partition settle_times = entity
+		mode: directLake
+		source
+			entityName: settle_times
+			schemaName: dbo
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+

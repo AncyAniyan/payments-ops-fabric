@@ -1,0 +1,13 @@
+relationship 60a36a6e-8dcb-bbb0-6127-b8a2fcd7226e
+	fromColumn: payments_curated.initiated_date
+	toColumn: dim_date.date
+
+relationship 7be36279-9119-c3ac-2840-a14c96375842
+	fromColumn: payments_curated.counterparty_bank
+	toColumn: banks.bank_code
+
+relationship 2f61abe6-408f-2d04-c0b4-f887f37134b8
+	crossFilteringBehavior: bothDirections
+	fromColumn: settle_times.payment_id
+	toColumn: payments_curated.payment_id
+

@@ -1,0 +1,7 @@
+role CorporateOps
+	modelPermission: read
+
+	tablePermission payments_curated = [channel] = "Corporate"
+
+	annotation PBI_Id = b692bf79fe1042978fe5f2b129c1ba26
+

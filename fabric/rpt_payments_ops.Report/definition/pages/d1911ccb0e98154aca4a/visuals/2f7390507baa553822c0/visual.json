@@ -1,0 +1,302 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
+  "name": "2f7390507baa553822c0",
+  "position": {
+    "x": 10.105263157894736,
+    "y": 290.16541353383457,
+    "z": 3,
+    "height": 789.65413533834578,
+    "width": 1499.9097744360902,
+    "tabOrder": 3
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "recon_items"
+                    }
+                  },
+                  "Property": "end_to_end_id"
+                }
+              },
+              "queryRef": "recon_items.end_to_end_id",
+              "nativeQueryRef": "end_to_end_id"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "recon_items"
+                    }
+                  },
+                  "Property": "rail"
+                }
+              },
+              "queryRef": "recon_items.rail",
+              "nativeQueryRef": "rail"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "recon_items"
+                    }
+                  },
+                  "Property": "category"
+                }
+              },
+              "queryRef": "recon_items.category",
+              "nativeQueryRef": "category"
+            },
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "recon_items"
+                        }
+                      },
+                      "Property": "ledger_amount_sar"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(recon_items.ledger_amount_sar)",
+              "nativeQueryRef": "Sum of ledger_amount_sar"
+            },
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "recon_items"
+                        }
+                      },
+                      "Property": "rail_amount_sar"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(recon_items.rail_amount_sar)",
+              "nativeQueryRef": "Sum of rail_amount_sar"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "recon_items"
+                    }
+                  },
+                  "Property": "ledger_settlement_date"
+                }
+              },
+              "queryRef": "recon_items.ledger_settlement_date",
+              "nativeQueryRef": "ledger_settlement_date"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "recon_items"
+                    }
+                  },
+                  "Property": "rail_settlement_date"
+                }
+              },
+              "queryRef": "recon_items.rail_settlement_date",
+              "nativeQueryRef": "rail_settlement_date"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "b96a50c59c9090e1bc8c",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "recon_items"
+              }
+            },
+            "Property": "end_to_end_id"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "119342cb09db1a07203c",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "recon_items"
+              }
+            },
+            "Property": "rail"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "342b43794b696b0d1431",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "recon_items"
+              }
+            },
+            "Property": "category"
+          }
+        },
+        "type": "Categorical",
+        "filter": {
+          "Version": 2,
+          "From": [
+            {
+              "Name": "r",
+              "Entity": "recon_items",
+              "Type": 0
+            }
+          ],
+          "Where": [
+            {
+              "Condition": {
+                "Not": {
+                  "Expression": {
+                    "In": {
+                      "Expressions": [
+                        {
+                          "Column": {
+                            "Expression": {
+                              "SourceRef": {
+                                "Source": "r"
+                              }
+                            },
+                            "Property": "category"
+                          }
+                        }
+                      ],
+                      "Values": [
+                        [
+                          {
+                            "Literal": {
+                              "Value": "'matched'"
+                            }
+                          }
+                        ]
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        },
+        "objects": {
+          "general": [
+            {
+              "properties": {
+                "isInvertedSelectionMode": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "true"
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "name": "a76d12547ace0a9d40e0",
+        "field": {
+          "Aggregation": {
+            "Expression": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "recon_items"
+                  }
+                },
+                "Property": "ledger_amount_sar"
+              }
+            },
+            "Function": 0
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "ec35742472e10a2b5eb0",
+        "field": {
+          "Aggregation": {
+            "Expression": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "recon_items"
+                  }
+                },
+                "Property": "rail_amount_sar"
+              }
+            },
+            "Function": 0
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "832f57a73b07b3ee2ab9",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "recon_items"
+              }
+            },
+            "Property": "ledger_settlement_date"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "b240b206d98a860c6e17",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "recon_items"
+              }
+            },
+            "Property": "rail_settlement_date"
+          }
+        },
+        "type": "Categorical"
+      }
+    ]
+  }
+}
