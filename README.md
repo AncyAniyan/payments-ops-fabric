@@ -40,6 +40,9 @@ flowchart LR
 ### 5. Deployment Pipeline (DEV / TEST / PROD)
 ![Deployment Pipeline](images/pipeline.png)
 
+
+[Video Walkthrough (4 min)](https://drive.google.com/file/d/1uXbwUBFMC1mH1x08P5FyT6gvpTbgQj56/view?usp=drive_link) · [BRD](docs/BRD.md) · [DQ Report](docs/dq_report.md) · [Reconciliation Report](docs/recon_report.md)
+
 ## Key Metrics & Findings
 - **High-Throughput Analytics**: 124,283 payments (SAR 1.35B+ volume) across SARIE RTGS, IPS, and SWIFT rails.
 - **Straight-Through Processing (STP)**: Monitored STP rates across automated channels; surfaced root causes for manual repair and rejections (e.g. IPS AM02 amount caps).
