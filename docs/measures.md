@@ -1,5 +1,9 @@
 # DAX Measures Reference: Payments Operations (`sm_payments_ops`)
+# Payments Operations Measure Dictionary
 
+This measure catalog standardizes 12 core operational metrics tracking STP rates, settlement velocity, and reconciliation breaks across SARIE, IPS, and SWIFT rails. Operations and management use these uniform definitions in the Power BI app to monitor SLA compliance in real time and trigger exception alerts before cut-off deadlines.
+
+---
 ## Storage Mode: Direct Lake (Microsoft Fabric)
 This semantic model queries physical tables in OneLake via Direct Lake mode, eliminating refresh schedules while maintaining in-memory VertiPaq speeds.
 

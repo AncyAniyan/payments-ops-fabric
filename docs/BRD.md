@@ -13,6 +13,8 @@ Currently, operations teams lack real-time visibility into pipeline bottlenecks 
 This project delivers a unified enterprise intelligence and control platform on **Microsoft Fabric** (Lakehouse, Warehouse T-SQL, pandas DQ notebooks, and Direct Lake Power BI) to automate operational reporting and daily ledger-vs-rail reconciliation.
 
 ---
+**Executive Summary:** Psh Demo Bank processes ~1,350 payments daily across IPS, SARIE, and SWIFT, but operations, treasury, and finance lack real-time visibility into stuck transactions, post-cutoff queues, and settlement breaks. This platform delivers unified operational dashboards and daily automated reconciliation so teams can resolve exceptions before daily settlement cut-offs.
+---
 
 ## 2. Objectives & Measurable Success Criteria
 
